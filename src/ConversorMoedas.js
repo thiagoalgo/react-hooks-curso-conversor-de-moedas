@@ -52,7 +52,14 @@ function ConversorMoedas() {
             setResultadoConversao(cotacao)
             setExibirModal(true)
             setExibirSpinner(false)
+            setExibirAlerta(false)
+          } else {
+            setExibirSpinner(false)
+            setExibirAlerta(true)
           }
+      }).catch(err => {
+        setExibirSpinner(false)
+        setExibirAlerta(true)
       })
     }
 
@@ -109,7 +116,11 @@ function ConversorMoedas() {
               </Form.Control>
             </Col>
             <Col xs="2">
-              <Button variant="success" type="submit" block>
+              <Button 
+              variant="success" 
+              type="submit"
+              data-testid="btn-converter" 
+              block>
                 <span className={exibirSpinner ? null : 'hidden'}>
                   <Spinner animation="border" size="sm" />
                 </span>
@@ -122,7 +133,8 @@ function ConversorMoedas() {
         </Form>
         <Modal
           show={exibirModal}
-          onHide={handleFecharModal}>
+          onHide={handleFecharModal}
+          data-testid="modal">
           <Modal.Header closeButton>
             <Modal.Title>Conversão de Moedas</Modal.Title>
           </Modal.Header>
